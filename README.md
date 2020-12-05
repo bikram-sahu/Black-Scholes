@@ -1,6 +1,7 @@
 # Black-Scholes
 
 [![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/bikram-sahu/black-scholes/main/interactive_BSM.py)
+
 A project on Black-Scholes option pricing for European options.
 
 *The project is aimed at building intuition on Option Pricing and how it depends on various parameters. The plots come with interactive widgets.*
