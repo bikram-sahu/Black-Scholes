@@ -4,9 +4,9 @@ A project on Black-Scholes option pricing for European options.
 
 This repo contains:
 
-  * Analytical solution of BSM equation and sensitivity analysis of Option price to different parameters.
-  * Option Greeks
-  * Numerical Solution to Balck-Scholes
-   * Monte Carlo
-   * Finite Difference
-  * Interactive widget made using [Streamlit](https://www.streamlit.io/)
+  1. Analytical solution of BSM equation and sensitivity analysis of Option price to different parameters.
+  2. Option Greeks
+  3. Numerical Solution to Balck-Scholes
+	  * Monte Carlo
+	  * Finite Difference
+  4. Interactive widget made using [Streamlit](https://www.streamlit.io/)
