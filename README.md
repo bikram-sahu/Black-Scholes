@@ -9,4 +9,4 @@ This repo contains:
   3. Numerical Solution to Balck-Scholes
 	  * Monte Carlo
 	  * Finite Difference
-  4. Interactive widget made using [Streamlit](https://www.streamlit.io/)
+  4. Interactive app made using [Streamlit](https://www.streamlit.io/)
