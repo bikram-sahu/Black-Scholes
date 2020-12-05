@@ -1,11 +1,15 @@
 # Black-Scholes
 
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/bikram-sahu/black-scholes/main/interactive_BSM.py)
 A project on Black-Scholes option pricing for European options.
 
-This repo contains:
+*The project is aimed at building intuition on Option Pricing and how it depends on various parameters. The plots come with interactive widgets.*
 
-  1. Analytical solution of BSM equation and sensitivity analysis of Option price to different parameters.
-  2. Option Greeks
+This contains:
+
+  1. Analytical solution of Black-Scholes equation and sensitivity analysis of Option price to different parameters.
+  2. Option Greeks: Delta, Gamma, Vega, Theta
+    * Plots of how these Greeks for call options varies with Time-to-Maturity.
   3. Numerical Solution to Balck-Scholes
 	  * Monte Carlo
 	  * Finite Difference

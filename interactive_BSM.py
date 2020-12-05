@@ -23,7 +23,9 @@ def main():
     app_mode = st.sidebar.selectbox("Choose the app mode",
                                     ["Select", "Option Price", "Option Greeks", "Show the source code"])
     
-    if app_mode == "Show the source code":
+    if app_mode == "Select":
+        st.sidebar.success('To continue select from the dropdown.')
+    elif app_mode == "Show the source code":
         readme_text.empty()
         st.code(get_file_content_as_string("interactive_BSM.py"))
     elif app_mode == "Option Price":
