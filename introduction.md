@@ -1,6 +1,17 @@
 **@author: Bikram (https://github.com/bikram-sahu/Black-Scholes)**
 
-# The Black-Scholes option pricing formula for European options
+# The Black-Scholes option pricing formula for European options.
+
+*The project is aimed at building intuition on Option Pricing and how it depends on various parameters. The plots come with interactive widgets.*
+
+This contains:
+
+  1. Analytical solution of Black-Scholes equation and sensitivity analysis of Option price to different parameters.
+  2. Option Greeks: Delta, Gamma, Vega, Theta
+  3. Numerical Solution to Balck-Scholes
+	  * Monte Carlo
+	  * Finite Difference
+
 
 **The BSM equation:**
 
