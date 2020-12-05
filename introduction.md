@@ -1,4 +1,6 @@
-r'''
+**@author: Bikram (https://github.com/bikram-sahu/Black-Scholes)**
+
+# The Black-Scholes option pricing formula for European options
 
 **The BSM equation:**
 
@@ -23,4 +25,3 @@ $$
 d_{2}=\frac{\log \left(S_{0} / K\right)+\left(r-\frac{1}{2} \sigma^{2}\right)(T-t)}{\sigma \sqrt{T-t}}=d_{1}-\sigma \sqrt{T-t}
 $$
 and $N$ is the CDF of standard normal distribution.
-'''

@@ -1,17 +1,20 @@
 import streamlit as st
-
-r'''
-**@author: Bikram (https://github.com/bikram-sahu/Black-Scholes)**
-'''
-st.title('The Black-Scholes option pricing formula for European options')
-
-
 import numpy as np
 from scipy.stats import norm
 import pandas as pd
+import os, urllib
 import matplotlib.pyplot as plt
 import seaborn as sns
 sns.set()
+
+
+def get_file_content_as_string(path):
+    url = 'https://raw.githubusercontent.com/bikram-sahu/Black-scholes/main/' + path
+    response = urllib.request.urlopen(url)
+    return response.read().decode("utf-8")
+
+st.markdown(get_file_content_as_string(introduction.md))
+
 
 # Auxiliary function for d_one risk-adjusted probability
 
