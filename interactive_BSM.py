@@ -13,7 +13,7 @@ def get_file_content_as_string(path):
     response = urllib.request.urlopen(url)
     return response.read().decode("utf-8")
 
-st.markdown(get_file_content_as_string(introduction.md))
+st.markdown(get_file_content_as_string("introduction.md"))
 
 
 # Auxiliary function for d_one risk-adjusted probability
