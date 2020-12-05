@@ -10,10 +10,10 @@ This contains:
 
   1. Analytical solution of Black-Scholes equation and sensitivity analysis of Option price to different parameters.
   2. Option Greeks: Delta, Gamma, Vega, Theta
-    * Plots of how these Greeks for call options varies with Time-to-Maturity.
+      * Plots of how these Greeks for call options varies with Time-to-Maturity.
   3. Numerical Solution to Balck-Scholes
-	  * Monte Carlo
-	  * Finite Difference
+      * Monte Carlo
+      * Finite Difference
   4. Interactive app made using [Streamlit](https://www.streamlit.io/)
   
   The link to the app: https://share.streamlit.io/bikram-sahu/black-scholes/main/interactive_BSM.py
