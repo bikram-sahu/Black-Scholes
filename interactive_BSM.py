@@ -455,7 +455,7 @@ def run_theta():
     st.pyplot(fig)
 
 def run_monte_carlo():
-    var = st.sidebar.selectbox("Select a variable", [
+    var = st.sidebar.selectbox("Select an option", [
                                "Algorithm", "Implementation"])
 
     if var == "Algorithm":
@@ -463,11 +463,11 @@ def run_monte_carlo():
        st.markdown("[Click here to access the Jupyter notebook of the code implemented.](https://github.com/bikram-sahu/Black-Scholes/blob/main/Monte-Carlo-BSM.ipynb)")
        st.markdown("Select **Implementation** from dropdown box to see the results of Monte Carlo Simulation.")
     if var == "Implementation":
-        S0 = 100.
-        K = 105.
-        T = 1.0
-        r = 0.05
-        sigma = 0.2
+        S0 = st.sidebar.slider('Stock price at t=0', 50, 200, 110)
+        K = st.sidebar.slider('Strike price', 50, 200, 100)
+        T = st.sidebar.slider('Time-to-Maturity', 0.0, 1.5, 0.5)
+        r = st.sidebar.slider('Risk-free rate', 0.01, 0.10, 0.05)
+        sigma = st.sidebar.slider('Sigma', 0.05, 0.60, 0.25)
 
 
         M = 50
@@ -489,26 +489,18 @@ def run_monte_carlo():
 
         # Calculating the Monte Carlo estimator
         C0 = np.exp(-r * T) * sum(np.maximum(S[-1] - K, 0)) / I
-        print('Monte Carlo Value is: ', C0)
+        st.write('Option Price Calculated by Monte Carlo Value is:', C0)
         exact_C0 = black_scholes(S0, K, T, r, sigma, "call")
-        print('Exact Value is:', exact_C0)
+        st.write('Option Price Calculated from Analytical formula is:',exact_C0)
 
         fig, ax1 = plt.subplots()
-
-
-        ax1 = plt.plot(S[:, :10])
-        plt.xlabel('Steps')
-        plt.ylabel('Index level')
+        plt.plot(S[:, :10])
+        ax1.set(xlabel = 'Steps', ylabel = 'Stock Price', title = 'Simulated Stock Price Using Euler Method.')
         st.pyplot(fig)
 
         fig, ax = plt.subplots()
-
-
-        ax = plt.rcParams["figure.figsize"] = (15, 8)
         plt.hist(S[-1], bins=50)
-        plt.grid(True)
-        plt.xlabel('index level')
-        plt.ylabel('frequency')
+        ax.set(xlabel='Stock Price', ylabel = 'frequency', title = 'Stock Prices are log noramlly distributed.')
         st.pyplot(fig)
 
 if __name__ == "__main__":

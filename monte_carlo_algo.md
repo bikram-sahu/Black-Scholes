@@ -1,11 +1,13 @@
 # Monte Carlo Method
 
-We use the following alorithm to price an option,
+We use the following alorithm to price an option using Monte Carlo,
+
 1. Simulate the stock price under the risk neutral measure for the the desired time.
 2. Calculate the payoff
 3. Repeat step 1 and 2 for many times
 4. Calculate the average payoff
 5. Take the present value of the average payoff
+
 To perform the first step we assume the following time evolution for the stock price
 
 $$
