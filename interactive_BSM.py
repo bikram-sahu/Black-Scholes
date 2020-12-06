@@ -78,18 +78,19 @@ def run_option_price():
     if var == "Select":
        st.markdown(get_file_content_as_string("bs-analytical-formula.md"))
     elif var == "Sigma":
-        st.sidebar.text('Risk-free interest rate: 0.05')
-        r = 0.05
+        r = st.sidebar.slider('Risk-free rate', 0.01, 0.1, 0.05)
+        
         X = st.sidebar.slider('Strike price', 50, 150, 100)
         S = st.sidebar.slider('Stock price', 50, 150, 110)
         T = st.sidebar.slider('Time-to-Maturity', 0.0, 2.0, 0.5)
         sigma = np.arange(0.05, 0.61, 0.02)
         if S > X:
             st.sidebar.markdown('## In the Money!')
-        elif S< X:
+        elif S < X:
             st.sidebar.markdown('## Out of the Money!')
         elif S == X:
             st.sidebar.markdown('## At the Money!')
+        
         V = black_scholes(S, X, T, r, sigma, 'call')
         df = pd.DataFrame({'Sigma': sigma, 'Call prices': V})
         if st.checkbox('Show data'):
@@ -101,19 +102,13 @@ def run_option_price():
         st.pyplot(fig)
     
     elif var == "Stock Price":
-        st.sidebar.text('Risk-free interest rate: 0.05')
-        r = 0.05
+        r = st.sidebar.slider('Risk-free rate', 0.01, 0.1, 0.05)
+        
         X = st.sidebar.slider('Strike price', 50, 150, 100)
         T = st.sidebar.slider('Time-to-Maturity', 0.0, 2.0, 0.5)
         sigma = st.sidebar.slider('Sigma', 0.05, 0.61, 0.25)
         S = np.arange(50, 150, 3)
-        if S > X:
-            st.sidebar.markdown('## In the Money!')
-        elif S < X:
-            st.sidebar.markdown('## Out of the Money!')
-        elif S == X:
-            st.sidebar.markdown('## At the Money!')
-
+        
         V = black_scholes(S, X, T, r, sigma, 'call')
         df = pd.DataFrame({'Stock price': S, 'Call prices': V})
         if st.checkbox('Show data'):
@@ -125,8 +120,8 @@ def run_option_price():
         st.pyplot(fig)
     
     elif var =="Time-to-Maturity":
-        st.sidebar.text('Risk-free interest rate: 0.05')
-        r = 0.05
+        r = st.sidebar.slider('Risk-free rate', 0.01, 0.1, 0.05)
+        
         X = st.sidebar.slider('Strike price', 50, 150, 100)
         S = st.sidebar.slider('Stock price', 50, 150, 110)
         sigma = st.sidebar.slider('Sigma', 0.05, 0.60, 0.25)
@@ -137,6 +132,7 @@ def run_option_price():
             st.sidebar.markdown('## Out of the Money!')
         elif S == X:
             st.sidebar.markdown('## At the Money!')
+        
 
         V = black_scholes(S, X, T, r, sigma, 'call')
         df = pd.DataFrame({'T': T, 'Call prices': V})
