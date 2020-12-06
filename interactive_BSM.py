@@ -4,7 +4,6 @@ from scipy.stats import norm
 import pandas as pd
 import os, urllib
 import matplotlib.pyplot as plt
-
 import seaborn as sns
 sns.set()
 
