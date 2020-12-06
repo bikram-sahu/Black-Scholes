@@ -21,7 +21,7 @@ def main():
     # Once we have the dependencies, add a selector for the app mode on the sidebar.
     st.sidebar.title("Black-Scholes")
     app_mode = st.sidebar.selectbox("Choose the app mode",
-                                    ["Select", "Option Price", "Option Greeks", "Show the source code"])
+                                    ["Select", "Option Price", "Monte Carlo", "Option Greeks", "Show the source code"])
     
     if app_mode == "Select":
         st.sidebar.success('To continue select from the dropdown.')
@@ -34,6 +34,9 @@ def main():
     elif app_mode == "Option Greeks":
         readme_text.empty()
         run_greeks()
+    elif app_mode == "Monte Carlo":
+        readme_text.empty()
+        run_monte_carlo()
 
 
 def d11(S, X, T, r, sigma):
@@ -450,6 +453,63 @@ def run_theta():
         title='Theta for European Call & Put Option as a function of Time-to-Maturity')
     
     st.pyplot(fig)
+
+def run_monte_carlo():
+    var = st.sidebar.selectbox("Select a variable", [
+                               "Algorithm", "Implementation"])
+
+    if var == "Algorithm":
+       st.markdown(get_file_content_as_string("monte_carlo_algo.md"))
+       st.markdown("[Click here to access the Jupyter notebook of the code implemented.](https://github.com/bikram-sahu/Black-Scholes/blob/main/Monte-Carlo-BSM.ipynb)")
+       st.markdown("Select **Implementation** from dropdown box to see the results of Monte Carlo Simulation.")
+    if var == "Implementation":
+        S0 = 100.
+        K = 105.
+        T = 1.0
+        r = 0.05
+        sigma = 0.2
+
+
+        M = 50
+        dt = T / M
+        I = 250000
+
+
+        def simulate_stock_price():
+            # Simulating I paths with M time step
+            S = S0 * np.exp(np.cumsum((r - 0.5 * sigma ** 2) * dt
+                                    + sigma * np.sqrt(dt) * np.random.standard_normal((M + 1, I)), axis=0))
+            return S
+
+
+        S = simulate_stock_price()
+
+        S[0] = S0
+
+
+        # Calculating the Monte Carlo estimator
+        C0 = np.exp(-r * T) * sum(np.maximum(S[-1] - K, 0)) / I
+        print('Monte Carlo Value is: ', C0)
+        exact_C0 = black_scholes(S0, K, T, r, sigma, "call")
+        print('Exact Value is:', exact_C0)
+
+        fig, ax1 = plt.subplots()
+
+
+        ax1 = plt.plot(S[:, :10])
+        plt.xlabel('Steps')
+        plt.ylabel('Index level')
+        st.pyplot(fig)
+
+        fig, ax = plt.subplots()
+
+
+        ax = plt.rcParams["figure.figsize"] = (15, 8)
+        plt.hist(S[-1], bins=50)
+        plt.grid(True)
+        plt.xlabel('index level')
+        plt.ylabel('frequency')
+        st.pyplot(fig)
 
 if __name__ == "__main__":
     main()
