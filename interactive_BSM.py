@@ -495,12 +495,14 @@ def run_monte_carlo():
 
         fig, ax1 = plt.subplots()
         plt.plot(S[:, :10])
-        ax1.set(xlabel = 'Steps', ylabel = 'Stock Price', title = 'Simulated Stock Price Using Euler Method.')
+        ax1.set(xlabel='Steps', ylabel='Stock Price',
+                title='Simulated Stock Price Using Euler Method.')
         st.pyplot(fig)
 
         fig, ax = plt.subplots()
         plt.hist(S[-1], bins=50)
-        ax.set(xlabel='Stock Price', ylabel = 'frequency', title = 'Stock Prices are log noramlly distributed.')
+        ax.set(xlabel='Stock Price', ylabel='frequency',
+               title='Stock Prices are log noramlly distributed.')
         st.pyplot(fig)
 
 if __name__ == "__main__":
