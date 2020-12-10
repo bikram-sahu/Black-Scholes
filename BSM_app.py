@@ -85,7 +85,7 @@ def black_scholes(S, X, T, r, sigma, option_type):
 
 def run_option_price():
 
-    st.markdown(get_file_content_as_string("bs-analytical-formula.md"))
+    st.latex(get_file_content_as_string("bs-analytical-formula.md"))
     st.markdown("**Calculate Option Price from Black-Scholes formula:**")
     col1, col2, col3 = st.beta_columns(3)
     opt_type = col1.selectbox("Option type", ['call', 'put'])
@@ -192,6 +192,8 @@ def run_option_price():
             df.plot('T', 'Option prices', kind='scatter', ax=ax)
             ax.set(title="Option Price Vs Time-to-Maturity")
             st.pyplot(fig)
+            with st.beta_expander('Explain me!'):
+            st.write("Add Explaination")
         
         if option_type == 'put':
             col1, col2 = st.beta_columns((3, 1))
@@ -208,6 +210,8 @@ def run_option_price():
             df.plot('T', 'Option prices', kind='scatter', ax=ax)
             ax.set(title="Option Price Vs Time-to-Maturity")
             st.pyplot(fig)
+            with st.beta_expander('Explain me!'):
+            st.write("Add Explaination")
 
 
 def run_greeks():
