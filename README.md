@@ -1,6 +1,6 @@
 # Black-Scholes
 
-[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/bikram-sahu/black-scholes/main/interactive_BSM.py)
+[![Open in Streamlit](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/bikram-sahu/black-scholes/main/BSM_app.py)
 
 A project on Black-Scholes option pricing for European options.
 
@@ -16,4 +16,4 @@ This contains:
       * Finite Difference
   4. Interactive app made using [Streamlit](https://www.streamlit.io/)
   
-  The link to the app: https://share.streamlit.io/bikram-sahu/black-scholes/main/interactive_BSM.py
+  The link to the app: https://share.streamlit.io/bikram-sahu/black-scholes/main/BSM_app.py
