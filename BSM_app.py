@@ -193,7 +193,7 @@ def run_option_price():
             ax.set(title="Option Price Vs Time-to-Maturity")
             st.pyplot(fig)
             with st.beta_expander('Explain me!'):
-            st.write("Add Explaination")
+                st.write("Add Explaination")
         
         if option_type == 'put':
             col1, col2 = st.beta_columns((3, 1))
@@ -211,7 +211,7 @@ def run_option_price():
             ax.set(title="Option Price Vs Time-to-Maturity")
             st.pyplot(fig)
             with st.beta_expander('Explain me!'):
-            st.write("Add Explaination")
+                st.write("Add Explaination")
 
 
 def run_greeks():
