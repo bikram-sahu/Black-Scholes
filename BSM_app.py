@@ -13,6 +13,12 @@ def get_file_content_as_string(path):
     response = urllib.request.urlopen(url)
     return response.read().decode("utf-8")
 
+def display_source_code(path):
+    url = 'https://raw.githubusercontent.com/bikram-sahu/Black-scholes/main/' + path
+    response = urllib.request.urlopen(url)
+    return response.read().decode("utf-8")
+
+
 
 def main():
     # Render the readme as markdown using st.markdown.
@@ -27,7 +33,7 @@ def main():
         st.sidebar.success('To continue select from the dropdown.')
     elif app_mode == "Show the source code":
         readme_text.empty()
-        st.code(get_file_content_as_string("BSM_app.py"))
+        st.code(display_source_code("BSM_app.py"))
     elif app_mode == "Option Price":
         readme_text.empty()
         run_option_price()
@@ -146,44 +152,62 @@ def run_option_price():
                 st.write("Add Explaination")
 
     elif var == "Option Price Vs Stock Price":
+        st.info('*You can vary other parameters from sidebar*')
         r = st.sidebar.slider('Risk-free rate', 0.01, 0.1, 0.05)
-
         X = st.sidebar.slider('Strike price', 50, 150, 100)
         T = st.sidebar.slider('Time-to-Maturity', 0.0, 2.0, 0.5)
         sigma = st.sidebar.slider('Sigma', 0.05, 0.61, 0.25)
         S = np.arange(50, 150, 3)
+        V = black_scholes(S, X, T, r, sigma, option_type)
+        df = pd.DataFrame({'Stock price': S, 'Option prices': V})
 
-        V = black_scholes(S, X, T, r, sigma, 'call')
-        df = pd.DataFrame({'Stock price': S, 'Call prices': V})
-
+        
         fig, ax = plt.subplots()
-        df.plot('Stock price', 'Call prices', kind='scatter', ax=ax)
+        df.plot('Stock price', 'Option prices', kind='scatter', ax=ax)
         ax.set(title="Option Price Vs Stock Price")
         st.pyplot(fig)
+        with st.beta_expander('Explain me!'):
+            st.write("Add Explaination")
 
     elif var == "Option Price Vs Time-to-Maturity":
         r = st.sidebar.slider('Risk-free rate', 0.01, 0.1, 0.05)
-
         X = st.sidebar.slider('Strike price', 50, 150, 100)
         S = st.sidebar.slider('Stock price', 50, 150, 110)
         sigma = st.sidebar.slider('Sigma', 0.05, 0.60, 0.25)
         T = np.arange(0.1, 1.6, 0.1)
-        if S > X:
-            st.sidebar.markdown('In the Money!')
-        elif S < X:
-            st.sidebar.markdown('Out of the Money!')
-        elif S == X:
-            st.sidebar.markdown('At the Money!')
+        V = black_scholes(S, X, T, r, sigma, option_type)
 
-        V = black_scholes(S, X, T, r, sigma, 'call')
-        df = pd.DataFrame({'T': T, 'Call prices': V})
-        if st.checkbox('Show data'):
-            df
+        if option_type == 'call':
+            col1, col2 = st.beta_columns((3, 1))
+            col1.info('*You can vary other parameters from sidebar*')
+            if S > X:
+                col2.success('In the Money!')
+            elif S < X:
+                col2.error('Out of the Money!')
+            elif S == X:
+                col2.warning('At the Money!')
+            
+            df = pd.DataFrame({'T': T, 'Option prices': V})
+            fig, ax = plt.subplots()
+            df.plot('T', 'Option prices', kind='scatter', ax=ax)
+            ax.set(title="Option Price Vs Time-to-Maturity")
+            st.pyplot(fig)
+        
+        if option_type == 'put':
+            col1, col2 = st.beta_columns((3, 1))
+            col1.info('*You can vary other parameters from sidebar*')
+            if S < X:
+                col2.success('In the Money!')
+            elif S > X:
+                col2.error('Out of the Money!')
+            elif S == X:
+                col2.warning('At the Money!')
 
-        fig, ax = plt.subplots()
-        df.plot('T', 'Call prices', kind='scatter', ax=ax)
-        ax.set(title="Option Price Vs Time-to-Maturity")
-        st.pyplot(fig)
+            df = pd.DataFrame({'T': T, 'Option prices': V})
+            fig, ax = plt.subplots()
+            df.plot('T', 'Option prices', kind='scatter', ax=ax)
+            ax.set(title="Option Price Vs Time-to-Maturity")
+            st.pyplot(fig)
 
 
 def run_greeks():
