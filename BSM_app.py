@@ -98,7 +98,7 @@ def run_option_price():
         price = black_scholes(S, X, T, r, sigma, opt_type)
         st.write("Black-Scholes Option Price: ", price)
 
-    with st.beta_expander('Wish to know more on how option price varies with respect to each parameter?'):
+    with st.beta_expander('Wish to learn more on how option price varies with respect to each parameter?'):
         col1, col2 = st.beta_columns((3, 1))
         var = col1.selectbox("Select a plot",
                              ["Select", "Option Price Vs Sigma", "Option Price Vs Stock Price", "Option Price Vs Time-to-Maturity"])
@@ -303,6 +303,8 @@ def run_delta():
            title='Delta for European Call & Put Option')
 
     st.pyplot(fig)
+    with st.beta_expander('Explain me!'):
+        st.write("Add Explaination")
 
     S = np.arange(10, 200, 1)
     X = 100
@@ -326,6 +328,8 @@ def run_delta():
            title='Delta for European Call & Put Option')
 
     st.pyplot(fig)
+    with st.beta_expander('Explain me!'):
+        st.write("Add Explaination")
 
     S = 110
     X = [S*0.9, S, S*1.1]
@@ -350,6 +354,8 @@ def run_delta():
            title='Delta for European Call & Put Option as a function of Time-to-Maturity')
 
     st.pyplot(fig)
+    with st.beta_expander('Explain me!'):
+        st.write("Add Explaination")
 
 
 def run_gamma():
@@ -386,6 +392,8 @@ def run_gamma():
            title='Gamma for European Call Options as Time-to-Maturity varies')
 
     st.pyplot(fig)
+    with st.beta_expander('Explain me!'):
+        st.write("Add Explaination")
 
     S = 110
     X = [S*0.8, S*0.9, S]
@@ -409,6 +417,8 @@ def run_gamma():
     ax.set(xlabel='Time-to-Maturity', ylabel='gamma',
            title='Gamma for European Call & Put Option as a function of Time-to-Maturity')
     st.pyplot(fig)
+    with st.beta_expander('Explain me!'):
+        st.write("Add Explaination")
 
 
 def run_vega():
@@ -444,6 +454,8 @@ def run_vega():
     ax.set(xlabel='stock price', ylabel='vega',
            title='Vega for European Call Options as Time-to-Maturity varies')
     st.pyplot(fig)
+    with st.beta_expander('Explain me!'):
+        st.write("Add Explaination")
 
     S = 110
     X = [S*0.8, S*0.9, S]
@@ -467,6 +479,8 @@ def run_vega():
     ax.set(xlabel='Time-to-Maturity', ylabel='vega',
            title='Vega for European Call & Put Option as a function of Time-to-Maturity')
     st.pyplot(fig)
+    with st.beta_expander('Explain me!'):
+        st.write("Add Explaination")
 
 
 def run_theta():
@@ -502,6 +516,8 @@ def run_theta():
            title='Theta for European Call Options as Time-to-Maturity varies')
 
     st.pyplot(fig)
+    with st.beta_expander('Explain me!'):
+        st.write("Add Explaination")
 
     S = 110
     X = [S*0.8, S*0.9, S]
@@ -526,6 +542,8 @@ def run_theta():
            title='Theta for European Call & Put Option as a function of Time-to-Maturity')
 
     st.pyplot(fig)
+    with st.beta_expander('Explain me!'):
+        st.write("Add Explaination")
 
 
 def run_monte_carlo():
@@ -538,36 +556,39 @@ def run_monte_carlo():
        st.markdown(
            "Select **Implementation** from dropdown box to see the results of Monte Carlo Simulation.")
     elif var == "Implementation":
-        S0 = st.sidebar.slider('Stock price at t=0', 50, 200, 110)
-        K = st.sidebar.slider('Strike price', 50, 200, 100)
-        T = st.sidebar.slider('Time-to-Maturity', 0.0, 1.5, 0.5)
-        r = st.sidebar.slider('Risk-free rate', 0.01, 0.10, 0.05)
-        sigma = st.sidebar.slider('Sigma', 0.05, 0.60, 0.25)
-
+        st.write('**Enter the parameter values below!**')
+        col1, col2, col3 = st.beta_columns(3)
+        #opt_type = col1.selectbox("Option type", ['call', 'put'])
+        S0 = col1.number_input('Spot')
+        K = col2.number_input('Strike')
+        T = col3.number_input('Time-to-Maturity')
+        sigma = col1.number_input('Volatility')
+        r = col2.number_input('Risk-free rate')
+        
         def simulate_stock_price(S0, r, sigma, dt, M, I):
             # Simulating I paths with M time step
             S = S0 * np.exp(np.cumsum((r - 0.5 * sigma ** 2) * dt + sigma *
                                       np.sqrt(dt) * np.random.standard_normal((M + 1, I)), axis=0))
-
             return S
-
-        M = 50
+        
+        M = st.sidebar.slider('Number of Steps:', 50, 500, 100)
         dt = T / M
-        I = 250000
+        I = st.sidebar.slider('Number of Simulations', 100000, 250000)
         S = simulate_stock_price(S0, r, sigma, dt, M, I)
         S[0] = S0
+        if col2.button('Calculate'):
+        
+            # Calculating the Monte Carlo estimator
+            C0 = np.exp(-r * T) * sum(np.maximum(S[-1] - K, 0)) / I
+            st.write('Option Price Calculated by Monte Carlo Value is:', C0)
+            exact_C0 = black_scholes(S0, K, T, r, sigma, "call")
+            st.write('Option Price Calculated from Analytical formula is:', exact_C0)
 
-        # Calculating the Monte Carlo estimator
-        C0 = np.exp(-r * T) * sum(np.maximum(S[-1] - K, 0)) / I
-        st.write('Option Price Calculated by Monte Carlo Value is:', C0)
-        exact_C0 = black_scholes(S0, K, T, r, sigma, "call")
-        st.write('Option Price Calculated from Analytical formula is:', exact_C0)
-
-        fig, ax1 = plt.subplots()
-        plt.plot(S[:, :10])
-        ax1.set(xlabel='Steps', ylabel='Stock Price',
-                title='Simulated Stock Price Using Euler Method.')
-        st.pyplot(fig)
+            fig, ax1 = plt.subplots()
+            plt.plot(S[:, :10])
+            ax1.set(xlabel='Steps', ylabel='Stock Price',
+                    title='Simulated Stock Price Using Euler Method.')
+            st.pyplot(fig)
 
 
 if __name__ == "__main__":
