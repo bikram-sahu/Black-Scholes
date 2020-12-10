@@ -13,7 +13,7 @@ from option_greeks import *
 
 
 def get_file_content_as_string(path):
-    url = 'https://raw.githubusercontent.com/bikram-sahu/Black-scholes/main/markdown_files' + path
+    url = 'https://raw.githubusercontent.com/bikram-sahu/Black-scholes/main/markdown_files/' + path
     response = urllib.request.urlopen(url)
     return response.read().decode("utf-8")
 
