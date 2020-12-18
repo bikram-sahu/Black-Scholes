@@ -664,7 +664,7 @@ def iv_vs_strike():
         asset of an option is further out of the money (OTM) or in the money (ITM), compared to at the money (ATM).
 
         ''')
-    url = 'https://github.com/bikram-sahu/Black-Scholes/blob/main/strike-vs-iv.xlsx?raw=true'
+    url = 'https://github.com/bikram-sahu/Black-Scholes/blob/main/strike-vs-iv.xls?raw=true'
     data = pd.read_excel(url)
     fig, ax = plt.subplots()
     data.plot('STRIKE PRICE', 'IV', kind='line',
