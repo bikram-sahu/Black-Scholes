@@ -664,16 +664,15 @@ def iv_vs_strike():
         asset of an option is further out of the money (OTM) or in the money (ITM), compared to at the money (ATM).
 
         ''')
-    #data = pd.read_excel('strike-vs-iv.xlsx')
-    file = st.file_uploader('Upload a file containg STRIKE PRICE & IV')
-    if file:
-        data = pd.read_excel(file)
-        fig, ax = plt.subplots()
-        data.plot('STRIKE PRICE', 'IV', kind='line',
-                    label='Implied Volatility', ax=ax)
-        ax.set(xlabel='Strike Price', ylabel='Implied Volatility',
-                title='IV vs Strike Price for Nifty')
-        st.pyplot(fig)
+    data = pd.read_excel(
+        io='https://github.com/bikram-sahu/Black-Scholes/blob/main/strike-vs-iv.xlsx?raw=true')
+    
+    fig, ax = plt.subplots()
+    data.plot('STRIKE PRICE', 'IV', kind='line',
+                label='Implied Volatility', ax=ax)
+    ax.set(xlabel='Strike Price', ylabel='Implied Volatility',
+            title='IV vs Strike Price for Nifty')
+    st.pyplot(fig)
 
 def delta_hedging():
     #st.markdown(get_file_content_as_string("delta-hedging.md"))
