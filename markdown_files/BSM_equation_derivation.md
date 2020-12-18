@@ -1,3 +1,5 @@
+## Deriving BSM equation
+
 We first derive the Black-Scholes-Merton equation for an option on an underlying security. Consider a portfolio II of a long option with value $V$ and $\Delta$ amount of short stock,
 
 $$
