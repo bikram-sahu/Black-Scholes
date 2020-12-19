@@ -725,57 +725,32 @@ def delta_hedging():
         with col3:
             st.write('Futures sold', -1*notional*Delta[0])
         
-        st.markdown('## Case 1')
-        Delta.append(0.6)
-        Gamma.append(0.09)
-        Vega.append(0.8)
-        Spot.append(105)
-        Sigma.append(17)
-        deltaS = (Spot[1] - Spot[0])
+        
+        st.markdown('## Cases')
+        
         col1, col2, col3, col4 = st.beta_columns(4)
-        with col1:
-            st.write('Delta =', Delta[1])
-            st.write('Gamma = ', Gamma[1])
-            st.write('Vega = ', Vega[1])
-        with col2:
-            st.write('Spot = ', Spot[1])
-            st.write('Strike =', Strike)
-            st.write('Sigma = ', Sigma[1])
+        Delta.append(col1.number_input('Delta', value = 0.6))
+        Gamma.append(col1.number_input('Gamma', value = 0.09))
+        Vega.append(col1.number_input('Vega', value = 0.8))
+        Spot.append(col2.number_input('Spot', value = 105))
+        Sigma.append(col2.number_input('Sigma', value = 17))
+    
+        deltaS = (Spot[1] - Spot[0])
         with col3:
+            st.info('Futures')
             st.write('Futures sold', -1*notional*Delta[1])
+            st.write("Add'l futures", round(-1*notional*(Delta[1] - Delta[0])))
             st.write('Future PnL', -1*notional*Delta[0]*deltaS)
         with col4:
-            #st.info('Option PnL')
+            st.info('Option PnL')
+
             
-            st.write('Delta PnL', Delta[0]*notional* deltaS)
-            st.write('Gamma PnL', 0.5* Gamma[0]* notional * deltaS**2)
-            st.write('Vega PnL', Vega[0]*notional* (Sigma[1] - Sigma[0]))
+            st.write('Gamma PnL', 0.5 * Gamma[0] * notional * deltaS**2)
+            st.write('Vega PnL', Vega[0]*notional * (Sigma[1] - Sigma[0]))
+            st.write('Delta PnL', Delta[0]*notional * deltaS)
 
-        st.markdown('## Case 2')
-        Delta.append(0.5)
-        Gamma.append(0.13)
-        Vega.append(1.2)
-        Spot.append(100)
-        Sigma.append(16)
-        deltaS = (Spot[2] - Spot[1])
-        col1, col2, col3, col4 = st.beta_columns(4)
-        with col1:
-            st.write('Delta =', Delta[2])
-            st.write('Gamma = ', Gamma[2])
-            st.write('Vega = ', Vega[2])
-        with col2:
-            st.write('Spot = ', Spot[2])
-            st.write('Strike =', Strike)
-            st.write('Sigma = ', Sigma[2])
-        with col3:
-            st.write('Futures sold', -1*notional*Delta[2])
-            st.write('Future PnL', -1*notional*Delta[1]*deltaS)
-        with col4:
-            #st.info('Option PnL')
 
-            st.write('Delta PnL', Delta[1]*notional * deltaS)
-            st.write('Gamma PnL', 0.5 * Gamma[1] * notional * deltaS**2)
-            st.write('Vega PnL', Vega[1]*notional * (Sigma[2] - Sigma[1]))
+        
 
 
 
