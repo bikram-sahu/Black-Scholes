@@ -27,11 +27,14 @@ $$
 
 d V=\frac{\partial V}{\partial S} \mu S d t+\frac{\partial V}{\partial S} \sigma S d W+\frac{\partial V}{\partial t} d t+\frac{1}{2} \sigma^{2} S^{2} \frac{\partial^{2} V}{\partial S^{2}} d t
 $$
+
 $$
 d V=\left(\frac{\partial V}{\partial S} \mu S+\frac{\partial V}{\partial t}+\frac{1}{2} \sigma^{2} S^{2} \frac{\partial^{2} V}{\partial S^{2}}\right) d t+\frac{\partial V}{\partial S} \sigma S d W $$
+
 $$
 \Delta d S=\Delta \mu S d t+\Delta \sigma S d W
 $$
+
 Substituting above equations into Eqn. 2 we get,
 $$
 d \Pi=\left(\frac{\partial V}{\partial S} \mu S+\frac{\partial V}{\partial t}+\frac{1}{2} \sigma^{2} S^{2} \frac{\partial^{2} V}{\partial S^{2}}-\Delta \mu S\right) d t+\left(\frac{\partial V}{\partial S} \sigma S-\Delta \sigma S\right) d W
