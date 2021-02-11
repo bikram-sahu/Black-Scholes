@@ -12,5 +12,8 @@ This contains:
   3. Numerical Solution to Balck-Scholes
 	  * Monte Carlo
 	  * Finite Difference
+  4. Volatility Surface
+  5. Delta Hedging
+  6. Value at Risk (VaR)
 
 
