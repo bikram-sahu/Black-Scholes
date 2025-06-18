@@ -9,7 +9,7 @@ This contains:
   1. Analytical solution of Black-Scholes equation and sensitivity analysis of Option price to different parameters.
   2. Option Greeks: Delta, Gamma, Vega, Theta
     * Plots of how these Greeks for call options varies with Time-to-Maturity.
-  3. Numerical Solution to Balck-Scholes
+  3. Numerical Solution to Black-Scholes
 	  * Monte Carlo
 	  * Finite Difference
   4. Volatility Surface
